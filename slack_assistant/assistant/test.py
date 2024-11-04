@@ -124,18 +124,38 @@ user_id = 'U07UC5R7AFP'
 max_tokens = 1000
 model_name = os.environ.get("MODEL_NAME")
 key = os.environ.get("GOOGLE_API_KEY")
-bot_sum_text = Summarize(model_name, key)
-result2 = bot_sum_text.summarize_thread(slack_bot_token, channel_id,thread_id,max_tokens)
-bot_sum_doc = Summarize_doc(model_name = model_name, api_key= key)
-result = bot_sum_doc.summarize_doc(slack_bot_token, channel_id, thread_id)
-total_result = result + result2
-print(total_result)
-print("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
-documents = total_result
-human_input = """tôi muốn đường dẫn đến tài liệu"""
-bot_interact = interact(model_name=model_name, api_key=key)
-result3 = bot_interact.interact_with_human(documents=documents, human_input=human_input)
-print(result3)
+from domain.use_cases.classify_file import classify_file
+bot_classify = classify_file(model_name, key)
+text_doc, link_doc = bot_classify.links_and_texts_of_doc(slack_bot_token, channel_id, thread_id)
+print(text_doc, link_doc)
+from domain.use_cases.summarize_doc import Summarize_doc
+bot_summarize_doc = Summarize_doc(model_name, key)
+result_doc = bot_summarize_doc.summarize_doc(link_doc, text_doc)
+print(result_doc)
+from domain.use_cases.summarize_thread import Summarize
+bot_summarize_thread = Summarize(model_name, key)
+result_thread = bot_summarize_thread.summarize_thread(slack_bot_token, channel_id, thread_id, max_tokens)
+print(result_thread)
+documents = result_doc + result_thread
+print(documents)
+from domain.use_cases.interact_bot import interact
+bot_interact = interact(model_name, key)
+human_input = """hãy trích xuất cho tôi đường dẫn tới tài liệu có trong dữ liệu trên"""
+result_interact = bot_interact.interact_with_human(documents, human_input)
+print("KKKKKKKKKKKK")
+print(result_interact)
+# bot_sum_text = Summarize(model_name, key)
+# result2 = bot_sum_text.summarize_thread(slack_bot_token, channel_id,thread_id,max_tokens)
+# bot_sum_doc = Summarize_doc(model_name = model_name, api_key= key)
+# result = bot_sum_doc.summarize_doc(slack_bot_token, channel_id, thread_id)
+# total_result = result + result2
+# print(total_result)
+# print("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL")
+# documents = total_result
+# human_input = """tôi muốn đường dẫn đến tài liệu"""
+# bot_interact = interact(model_name=model_name, api_key=key)
+# result3 = bot_interact.interact_with_human(documents=documents, human_input=human_input)
+# print(result3)
 
 
 # from domain.use_cases.ClassifyRequest import ClassifyRequest

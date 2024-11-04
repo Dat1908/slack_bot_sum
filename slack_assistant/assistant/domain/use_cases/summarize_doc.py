@@ -42,21 +42,6 @@ class Summarize_doc:
         response = self.bot.invoke(formatted_template)
         return response.text
     
-    def get_links_and_texts(self,slack_bot_token, channel_id, thread_id):
-        bot = SlackClient(slack_bot_token)
-        data = bot.get_thread(channel_id, thread_id)
-        messages = data.messages
-        texts = [message.text for message in messages]
-        links = []
-        texts = []
-        for msg in messages:
-            if msg.attachment is not None:
-                for att in msg.attachment:
-                    links.append(att['url_private'])
-                    texts.append(msg.text)
-        return links, texts
-    
-    def summarize_doc(self, slack_bot_token, channel_id, thread_id):
-        links_list, texts_list = self.get_links_and_texts(slack_bot_token, channel_id, thread_id)
+    def summarize_doc(self, links_list, texts_list):
         result = self.summarize_doc1(links_list,texts_list)
         return result

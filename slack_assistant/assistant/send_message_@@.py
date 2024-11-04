@@ -2,9 +2,7 @@ import os
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 from dotenv import load_dotenv
-from infrastructure.SlackClient import SlackClient
-from slack_sdk import WebClient
-client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
+
 load_dotenv('.env')
 app = App(token=os.environ.get("SLACK_BOT_TOKEN"))
 

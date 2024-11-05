@@ -78,20 +78,20 @@
 # # else:
 # #     print("No action needed.")
     
-from infrastructure.SlackClient import SlackClient
-from dotenv import load_dotenv
-from domain.use_cases.summarize_doc import Summarize_doc
-from domain.use_cases.summarize_thread import Summarize
-from domain.use_cases.interact_bot import interact
-load_dotenv()
-import os 
-import re 
-slack_bot_token = os.environ.get("SLACK_BOT_TOKEN")
+# from infrastructure.SlackClient import SlackClient
+# from dotenv import load_dotenv
+# from domain.use_cases.summarize_doc import Summarize_doc
+# from domain.use_cases.summarize_thread import Summarize
+# from domain.use_cases.interact_bot import interact
+# load_dotenv()
+# import os 
+# import re 
+# slack_bot_token = os.environ.get("SLACK_BOT_TOKEN")
 
-# bot = SlackClient(slack_bot_token)
-channel_id = 'C07U89CQGEA'
-thread_id =  '1730594527.347199'
-user_id = 'U07UC5R7AFP'
+# # bot = SlackClient(slack_bot_token)
+# channel_id = 'C07U89CQGEA'
+# thread_id =  '1730594527.347199'
+# user_id = 'U07UC5R7AFP'
 # data = bot.get_thread(channel_id=channel_id, thread_id= thread_id)
 
 # messages = data.messages
@@ -121,9 +121,9 @@ user_id = 'U07UC5R7AFP'
 # bot_sum_doc = Summarize_doc(model_name=model_name, api_key=key)
 # result = bot_sum_doc.summarize_doc(links_list= links, texts_list=texts)
 # print(result)
-max_tokens = 1000
-model_name = os.environ.get("MODEL_NAME")
-key = os.environ.get("GOOGLE_API_KEY")
+# max_tokens = 1000
+# model_name = os.environ.get("MODEL_NAME")
+# key = os.environ.get("GOOGLE_API_KEY")
 # from domain.use_cases.classify_file import classify_file
 # bot_classify = classify_file(model_name, key)
 # text_doc, link_doc = bot_classify.links_and_texts_of_doc(slack_bot_token, channel_id, thread_id)
@@ -137,29 +137,29 @@ key = os.environ.get("GOOGLE_API_KEY")
 # result_thread = bot_summarize_thread.summarize_thread(slack_bot_token, channel_id, thread_id, max_tokens)
 # print(result_thread)
 # documents = result_doc + result_thread
-data = """
-1. Tài liệu là https://files.slack.com/files-pri/T07UTJ9NLM7-F07V00DHB97/image.png. 
+# data = """
+# 1. Tài liệu là https://files.slack.com/files-pri/T07UTJ9NLM7-F07V00DHB97/image.png. 
 
-##  Tóm tắt:
+# ##  Tóm tắt:
 
-**1. Định nghĩa Đoạn Văn:**
+# **1. Định nghĩa Đoạn Văn:**
 
-Đoạn văn là đơn vị văn bản nhỏ, được sắp xếp theo luồng ý để trình bày ý kiến, suy nghĩ hoặc một phần nội dung. Đoạn văn gồm các câu văn có liên quan, có mục đích chung và được sắp xếp logic.
+# Đoạn văn là đơn vị văn bản nhỏ, được sắp xếp theo luồng ý để trình bày ý kiến, suy nghĩ hoặc một phần nội dung. Đoạn văn gồm các câu văn có liên quan, có mục đích chung và được sắp xếp logic.
 
-**2. Miêu tả Buổi Sáng Quê Hương:**
+# **2. Miêu tả Buổi Sáng Quê Hương:**
 
-Buổi sáng mùa hạ, không khí mát mẻ, ánh nắng ban mai nhẹ nhàng. Cánh đồng lúa chín vàng, nhấp nhô theo gió, sương đêm như ngọc trên lá lúa. Đàn cò trắng bay trên bầu trời, cây tre rì rào, tạo nên khung cảnh bình yên. Người nông dân ra đồng, tạo nên âm nhạc vui tươi của cuộc sống quê hương. 
+# Buổi sáng mùa hạ, không khí mát mẻ, ánh nắng ban mai nhẹ nhàng. Cánh đồng lúa chín vàng, nhấp nhô theo gió, sương đêm như ngọc trên lá lúa. Đàn cò trắng bay trên bầu trời, cây tre rì rào, tạo nên khung cảnh bình yên. Người nông dân ra đồng, tạo nên âm nhạc vui tươi của cuộc sống quê hương. 
 
-**3. Hành Trình Đến Trường:**
+# **3. Hành Trình Đến Trường:**
 
-Em mỉm cười chào đón ngày mới, bắt đầu hành trình đến trường trên xe đạp.
+# Em mỉm cười chào đón ngày mới, bắt đầu hành trình đến trường trên xe đạp.
 
-"""
-from domain.use_cases.interact_bot import interact
-bot_interact = interact(model_name, key)
-human_input = """Please list for me all links related to documents and translate the data to Korean."""
-result_interact = bot_interact.interact_with_human(data, human_input)
-print(result_interact)
+# """
+# from domain.use_cases.interact_bot import interact
+# bot_interact = interact(model_name, key)
+# human_input = """Please list for me all links related to documents and translate the data to Korean."""
+# result_interact = bot_interact.interact_with_human(data, human_input)
+# print(result_interact)
 # bot_sum_text = Summarize(model_name, key)
 # result2 = bot_sum_text.summarize_thread(slack_bot_token, channel_id,thread_id,max_tokens)
 # bot_sum_doc = Summarize_doc(model_name = model_name, api_key= key)
@@ -211,3 +211,90 @@ print(result_interact)
 # max_tokens = 1000
 # sum_text = bot_sum.summarize_thread(slack_token = slack_bot_token, channel_id= channel_id, thread_id = thread_id, max_tokens= max_tokens)
 # print(sum_text)
+import os
+from slack_sdk import WebClient
+from slack_sdk.errors import SlackApiError
+from dotenv import load_dotenv
+load_dotenv()
+# Tải token từ biến môi trường
+slack_token = os.environ.get("SLACK_BOT_TOKEN")
+client = WebClient(token=slack_token)
+# payload = {'user': 'U07U89A6HKQ', 'type': 'message', 'ts': '1730822939.140619', 'client_msg_id': 'ab24f555-fb20-45a9-a143-ac74f1ad7d4a', 'text': '<@U07UC5R7AFP> tôi muốn dịch sang tiếng anh', 'team': 'T07UTJ9NLM7', 'blocks': [{'type': 'rich_text', 'block_id': 'HFQSs', 'elements': [{'type': 'rich_text_section', 'elements': [{'type': 'user', 'user_id': 'U07UC5R7AFP'}, {'type': 'text', 'text': ' tôi muốn dịch sang tiếng anh'}]}]}], 'channel': 'D07U0EXQ5KR', 'event_ts': '1730822939.140619', 'channel_type': 'im'}
+# channel_id = 'D07U0EXQ5KR'
+payload = {'user': 'U07U89A6HKQ', 'type': 'message', 'ts': '1730826453.035769', 'client_msg_id': '1fce3a8d-20b4-481b-9fb2-3e2394026652', 'text': '<@U07UC5R7AFP> hiii', 'team': 'T07UTJ9NLM7', 'blocks': [{'type': 'rich_text', 'block_id': '2Rvmz', 'elements': [{'type': 'rich_text_section', 'elements': [{'type': 'user', 'user_id': 'U07UC5R7AFP'}, {'type': 'text', 'text': ' hiii'}]}]}], 'channel': 'D07U0EXQ5KR', 'event_ts': '1730826453.035769', 'channel_type': 'im'} 
+channel_id = payload['channel']
+response = client.conversations_history(channel=channel_id)
+messages = response['messages']
+
+# Lặp qua các tin nhắn và in ra
+for message in messages:
+    print(message)
+
+# import re
+
+# text = payload['text']
+
+# # Sử dụng regular expression để tìm user ID
+# match = re.search(r'<@(U\w+)>', text)
+# if match:
+#     user_id = match.group(1)  # Lấy ID người dùng
+#     print(user_id)  # In ra U07UC5R7AFP
+# all_messages = []
+# cursor = None
+
+# while True:
+#     try:
+#         response = client.conversations_history(channel=channel_id, cursor=cursor)
+#         messages = response['messages']
+
+#         user_messages = [msg for msg in messages if msg.get('user') == user_id]
+#         all_messages.extend(user_messages)
+        
+#         cursor = response['response_metadata']['next_cursor'] if 'response_metadata' in response and 'next_cursor' in response['response_metadata'] else None
+        
+#         if not cursor:  
+#             break
+
+#     except SlackApiError as e:
+#         print(f"Error fetching messages: {e.response['error']}")
+#         break
+#     else:
+#         print("Không tìm thấy user ID.")
+# print(all_messages[0]['text'])
+
+# import os
+# from slack_sdk import WebClient
+# from slack_sdk.errors import SlackApiError
+# from dotenv import load_dotenv
+# load_dotenv()
+# # Tải token từ biến môi trường
+# slack_token = os.environ.get("SLACK_BOT_TOKEN")
+# client = WebClient(token=slack_token)
+
+# def fetch_user_messages(channel_id, user_id):
+#     all_messages = []
+#     cursor = None
+
+#     while True:
+#         try:
+#             response = client.conversations_history(channel=channel_id, cursor=cursor)
+#             messages = response['messages']
+
+#             user_messages = [msg for msg in messages if msg.get('user') == user_id]
+#             all_messages.extend(user_messages)
+            
+#             cursor = response['response_metadata']['next_cursor'] if 'response_metadata' in response and 'next_cursor' in response['response_metadata'] else None
+            
+#             if not cursor:  
+#                 break
+
+#         except SlackApiError as e:
+#             print(f"Error fetching messages: {e.response['error']}")
+#             break
+
+#     return all_messages[0]['text']
+
+# # Thay thế 'C1234567890' và 'U1234567890' bằng ID kênh và ID người dùng của bạn
+# messages = fetch_user_messages('D07U0EXQ5KR', 'U07UC5R7AFP')
+# print(messages[0]['text'])  
+    

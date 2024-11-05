@@ -124,25 +124,41 @@ user_id = 'U07UC5R7AFP'
 max_tokens = 1000
 model_name = os.environ.get("MODEL_NAME")
 key = os.environ.get("GOOGLE_API_KEY")
-from domain.use_cases.classify_file import classify_file
-bot_classify = classify_file(model_name, key)
-text_doc, link_doc = bot_classify.links_and_texts_of_doc(slack_bot_token, channel_id, thread_id)
-print(text_doc, link_doc)
-from domain.use_cases.summarize_doc import Summarize_doc
-bot_summarize_doc = Summarize_doc(model_name, key)
-result_doc = bot_summarize_doc.summarize_doc(link_doc, text_doc)
-print(result_doc)
-from domain.use_cases.summarize_thread import Summarize
-bot_summarize_thread = Summarize(model_name, key)
-result_thread = bot_summarize_thread.summarize_thread(slack_bot_token, channel_id, thread_id, max_tokens)
-print(result_thread)
-documents = result_doc + result_thread
-print(documents)
+# from domain.use_cases.classify_file import classify_file
+# bot_classify = classify_file(model_name, key)
+# text_doc, link_doc = bot_classify.links_and_texts_of_doc(slack_bot_token, channel_id, thread_id)
+# print(text_doc, link_doc)
+# from domain.use_cases.summarize_doc import Summarize_doc
+# bot_summarize_doc = Summarize_doc(model_name, key)
+# result_doc = bot_summarize_doc.summarize_doc(link_doc, text_doc)
+# print(result_doc)
+# from domain.use_cases.summarize_thread import Summarize
+# bot_summarize_thread = Summarize(model_name, key)
+# result_thread = bot_summarize_thread.summarize_thread(slack_bot_token, channel_id, thread_id, max_tokens)
+# print(result_thread)
+# documents = result_doc + result_thread
+data = """
+1. Tài liệu là https://files.slack.com/files-pri/T07UTJ9NLM7-F07V00DHB97/image.png. 
+
+##  Tóm tắt:
+
+**1. Định nghĩa Đoạn Văn:**
+
+Đoạn văn là đơn vị văn bản nhỏ, được sắp xếp theo luồng ý để trình bày ý kiến, suy nghĩ hoặc một phần nội dung. Đoạn văn gồm các câu văn có liên quan, có mục đích chung và được sắp xếp logic.
+
+**2. Miêu tả Buổi Sáng Quê Hương:**
+
+Buổi sáng mùa hạ, không khí mát mẻ, ánh nắng ban mai nhẹ nhàng. Cánh đồng lúa chín vàng, nhấp nhô theo gió, sương đêm như ngọc trên lá lúa. Đàn cò trắng bay trên bầu trời, cây tre rì rào, tạo nên khung cảnh bình yên. Người nông dân ra đồng, tạo nên âm nhạc vui tươi của cuộc sống quê hương. 
+
+**3. Hành Trình Đến Trường:**
+
+Em mỉm cười chào đón ngày mới, bắt đầu hành trình đến trường trên xe đạp.
+
+"""
 from domain.use_cases.interact_bot import interact
 bot_interact = interact(model_name, key)
-human_input = """hãy trích xuất cho tôi đường dẫn tới tài liệu có trong dữ liệu trên"""
-result_interact = bot_interact.interact_with_human(documents, human_input)
-print("KKKKKKKKKKKK")
+human_input = """Please list for me all links related to documents and translate the data to Korean."""
+result_interact = bot_interact.interact_with_human(data, human_input)
 print(result_interact)
 # bot_sum_text = Summarize(model_name, key)
 # result2 = bot_sum_text.summarize_thread(slack_bot_token, channel_id,thread_id,max_tokens)

@@ -28,7 +28,7 @@ class interact:
         result = self.bot.model.count_tokens(text)
         return result.total_tokens
 
-    def interact_with_human(self, documents, human_input):
-        formatted_template = self.prompt.format(documents = documents, human_input = human_input)
+    def interact_with_human(self, data, human_input):
+        formatted_template = self.prompt.format(data = data, human_input = human_input)
         response = self.bot.invoke(formatted_template)
         return response.text

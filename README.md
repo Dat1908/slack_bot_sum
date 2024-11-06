@@ -1,6 +1,7 @@
 # Slack bot summarize
 ## 1. Install and setup environtment 
 ### 1.1 Prepare key for Gemini, Slack_bot_token 
+- Access link https://aistudio.google.com/apikey, create account and choose Create API Key.
 
 ### 1.2 Create your workspace in Slack and add role for Bot
 

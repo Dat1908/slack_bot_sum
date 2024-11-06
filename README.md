@@ -19,6 +19,6 @@ Reference link: https://www.youtube.com/watch?v=KJ5bFv-IRFM&list=PLzMcBGfZo4-kqy
 #### Create file .env in slack_bot_sum\slack_assistant\assistant
 - This file include: MODEL_NAME = gemini-1.5-flash, GOOGLE_API_KEY = [your key], SLACK_BOT_TOKEN = [your key]
 #### Set up environtment
-- ```pip install -r requirements.txt```
+```pip install -r requirements.txt```
 ## 2. Running Bot
 - Run file app.py

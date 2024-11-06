@@ -3,3 +3,5 @@ test.py
 
 # Bỏ qua file .env
 .env
+
+__pycache__/

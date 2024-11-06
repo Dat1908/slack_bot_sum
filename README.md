@@ -1,2 +1,4 @@
 # Slack bot summarize
-Slack_bot_summarize giúp người sử dụng Slack có thể tóm tắt 1 thread bao gồm rất nhiều tin nhắn giữa mọi người, thông báo,... và Bot sẽ phản hồi trực tiếp về inbox cho người dùng, đồng thời người dùng có thể tương tác với Bot để trích xuất thông tin, dịch,...
+## Contents
+- [Install and setup environment]
+- [Running Bot]

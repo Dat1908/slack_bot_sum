@@ -14,7 +14,7 @@
 - Choose OAuth & Permissionsin Features of your bot.
 - Add roles app_mentions:read, assistant:write, calls:read, calls:write, canvases:read, canvases:write, channels:history, channels:manage, channels:read, chat:write, chat:write.customize, chat:write.public, files:write, groups:history, groups:write, im:history, im:read, im:write, links.embed:write, links:read, links:write, mpim:history, mpim:write, remote_files:read, remote_files:share, remote_files:write, usergroups:read, usergroups:write, users:read, users:write in Bot Token Scopes.     
 ### 1.3 Prepare for running 
-### Clone repository
+#### Clone repository
 ```git clone https://github.com/Dat1908/slack_bot_sum.git```
 #### Create file .env in slack_bot_sum\slack_assistant\assistant
 - This file include: MODEL_NAME = gemini-1.5-flash, GOOGLE_API_KEY = [your key], SLACK_BOT_TOKEN = [your key]

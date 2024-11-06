@@ -42,36 +42,6 @@ class Summarize:
         response = self.bot.invoke(formatted_template)
         return response.text
 
-    # def get_all_data(self,slack_token ,channel_id, thread_id):
-    #     slack = SlackClient(slack_token)
-    #     data = slack.get_thread(channel_id,thread_id)
-    #     messages = data.messages
-    #     attachments = [msg.attachment for msg in messages if msg.attachment is not None]
-    #     messages_without_attachment = [msg for msg in messages if msg.attachment is None]
-    #     link_file = ""
-    #     if attachments != []:
-    #         for i in range(len(attachments)):
-    #             link_file += " " + attachments[i][0]['url_private']
-    #     else: 
-    #         link_file += "This message don't have any attachments"
-    #     return link_file, messages_without_attachment
-    
-    # def fetch_thread_messages(self,slack_token ,channel_id, thread_id ):
-    #     """
-    #     Fetch all messages in a thread from a Slack channel.
-
-    #     Args:
-    #         slack_token (str): Slack API token for authentication.
-    #         channel_id (str): The ID of the Slack channel.
-    #         thread_id (str): The timestamp of the thread.
-
-    #     Returns:
-    #         List[str]: A list of text messages from the thread.
-    #     """
-        
-        
-        
-    #     return texts
     def get_clear_texts(self, slack_token, channel_id, thread_id):
         bot = SlackClient(slack_token)
         data = bot.get_thread(channel_id, thread_id)

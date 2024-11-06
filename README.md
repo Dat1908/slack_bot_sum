@@ -1,4 +1,2 @@
 # Slack bot summarize
-## Contents
-- [Install and setup environment]
-- [Running Bot]
+## 1. Install and setup environtment 
